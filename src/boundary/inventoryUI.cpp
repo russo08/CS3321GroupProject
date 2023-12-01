@@ -20,9 +20,11 @@ while(!quit)
             "2. Modify Inventory Item\n" <<
             "3. View Inventory List\n" <<
             "4. Exit\n";
+            std::cout << "\nYour Selection\t";
             std::cin >> user_input;
         }
         break;
+
         case '1': // add and inventory item
         {
             std::string item_name;
@@ -64,6 +66,7 @@ while(!quit)
 
             std::cin >> selection;
 
+
             switch(selection)
             {
                 case '1': // Modify item count
@@ -85,6 +88,7 @@ while(!quit)
                     }
                 }
                 break;
+
                 case '2': // Modify item threshold
                 {
                     std::cout << "Type the name of the item you would like to change\n\n";
@@ -104,6 +108,7 @@ while(!quit)
                     }
                 }
                 break;
+
                 case '3': // Modify both item count and item threshold
                 {
                     std::cout << "Type the name of the item you would like to change\n\n";
@@ -126,14 +131,18 @@ while(!quit)
                     }
                 }
                 break;
+
                 case '4': // Exit
                 {
                     user_input = 'H';
                 }
                 break;
+
                 default:
                 {
-                    std::cout << "\nOption not valid. Please try again\n";
+                    std::cin.clear(); // clear input error flag
+                    std::cin.ignore(100,'\n'); // clear input buffer
+                    std::cout << "\nInvalid selection. Please try again\n";
                     user_input = '2';
                 }
             }
@@ -159,9 +168,12 @@ while(!quit)
 
         default: // invalid input
         {
-            std::cout << "Invalid selection, please try agian\n\n";
+            std::cin.clear(); // clear input error flag
+            std::cin.ignore(100,'\n'); // clear input buffer
+            std::cout << "\nInvalid selection, please try agian\n\n";
             user_input = 'H';
         }
+        break;
     }
 }
 }
