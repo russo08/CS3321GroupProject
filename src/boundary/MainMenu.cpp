@@ -14,7 +14,7 @@
 #include "boundary/StaffUI.h"
 #include "boundary/patientUI.h"
 #include "control/dataManipulation.h"
-#include "control/LoginVerification.h"
+#include "control/loginVerification.h"
 // #include "control/storedata.h"
 
 

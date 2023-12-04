@@ -291,39 +291,39 @@ void dataManipulation::wtireToInventoryFile(Inventory item)
     inventory_file.close();
 }
 
-// Inventory dataManipulation::getInventoryFromFile(std::string item)
-// {
-//     std::ifstream inventory_file;
-//     bool item_found = false;
+Inventory dataManipulation::getInventoryFromFile(std::string item)
+{
+    std::ifstream inventory_file;
+    bool item_found = false;
     
-//     Inventory list;
-//     Inventory empty;
+    Inventory list;
+    Inventory empty;
 
-//     inventory_file.open("./database/inventory.txt", std::ios::in);
+    inventory_file.open("./database/inventory.txt", std::ios::in);
 
-//     inventory_file.read((char*)&list, sizeof(list));
+    inventory_file.read((char*)&list, sizeof(list));
 
-//     while (!inventory_file.eof())
-//         {
-//             if(list.getItemName() == item)
-//             {
-//                 item_found = true;
-//                 break;
-//             }
-//             inventory_file.read((char*)&list, sizeof(list));
-//         }
-//         inventory_file.close();
+    while (!inventory_file.eof())
+        {
+            if(list.getItemName() == item)
+            {
+                item_found = true;
+                break;
+            }
+            inventory_file.read((char*)&list, sizeof(list));
+        }
+        inventory_file.close();
 
-//     if (item_found)
-//     {
-//         return list;
-//     }
-//     else{
-//         std::cout << "\n Item not found\n";
-//         return empty;
-//     }
+    if (item_found)
+    {
+        return list;
+    }
+    else{
+        std::cout << "\n Item not found\n";
+        return empty;
+    }
 
-// }
+}
 // creates a vector of Inventory items from the file
 std::vector<Inventory> dataManipulation::createList()
 {
@@ -360,4 +360,84 @@ void dataManipulation::writeUpdatedItemToFile(std::vector<Inventory> inventory_l
     
     inventory_file.close();
 
+}//******************************************************************************************************************
+//                                          PROCEDURE DATA MANIPULATION
+//******************************************************************************************************************
+
+void dataManipulation::wtireToProcedureFile(Procedure pro)
+{
+    std::ofstream procedure_file;
+
+    procedure_file.open("./database/procedure.txt", std::ios::app);
+
+    // if there is no file, create one and add the item you want to add to the file
+    if(!procedure_file.is_open())
+     {
+        std:: ofstream procedure_file("./database/procedure.txt");
+        procedure_file.write((char*)&pro, sizeof(pro));
+        std::cout << "file is not open\n";
+     }
+
+     else
+     {
+        procedure_file.write((char*)&pro, sizeof(pro));
+        std::cout << "file is open\n";
+     }
+
+    procedure_file.close();
 }
+
+Procedure dataManipulation::getProcedureFromFiile(std::string procedure_string)
+{
+    std::ifstream procedure_file;
+    Procedure pro;
+    Procedure empty;
+    bool is_found = false;
+
+    procedure_file.open("./database/procedure.txt", std::ios::in);
+
+    procedure_file.read((char*)&pro, sizeof(pro));
+
+    while(!procedure_file.eof())
+    {
+        if(pro.getProcedureName() == procedure_string)
+        {
+            is_found = true;
+            break;
+        }
+    }
+
+    if (is_found)
+    {
+        return pro;
+    }
+    else{
+        std::cout << "Procedure not found\n";
+        return empty;
+    }
+}
+
+std::vector<Procedure> dataManipulation::getProcedureListFromFile(std::vector<std::string> pro_string_vec)
+{
+    std::vector<Procedure> procedure_vector; 
+    std::ifstream procedure_file;
+    Procedure pro;
+
+    procedure_file.open("./database/procedure.txt", std::ios::in);
+
+    procedure_file.read((char*)&pro, sizeof(pro));
+
+    while(!procedure_file.eof())
+    {
+        for (int i = 0; i < pro_string_vec.size(); i++ )
+        {
+            if(pro.getProcedureName() == pro_string_vec[i])
+            {
+                procedure_vector.push_back(pro);
+            }
+        }
+    }
+
+    return std::vector<Procedure>();
+}
+

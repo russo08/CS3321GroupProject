@@ -6,6 +6,7 @@
 #include <memory>
 #include "entity/user.h"
 #include "entity/inventory.h"
+#include "entity/procedure.h"
 
 class dataManipulation
 {
@@ -26,6 +27,11 @@ public:
     Inventory getInventoryFromFile(std::string);
     std::vector<Inventory> createList();
     void writeUpdatedItemToFile (std::vector<Inventory>);
+
+    // Procedure stuff
+    void wtireToProcedureFile(Procedure);
+    Procedure getProcedureFromFiile(std::string);
+    std::vector<Procedure> getProcedureListFromFile(std::vector<std::string>);
 
 };
 
